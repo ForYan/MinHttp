@@ -1,0 +1,9 @@
+com\For\JM\controllers\StaticController$1.class
+com\For\JM\Server.class
+com\For\JM\http\Request.class
+com\For\JM\http\Response.class
+com\For\JM\http\Controller.class
+com\For\JM\http\getClassLoader.class
+com\For\JM\WebApp.class
+com\For\JM\controllers\StaticController.class
+com\For\JM\http\Status.class

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+    <controller>
+        <name>List</name>
+		<class>ListController</class>
+    </controller>
+
+    <controller>
+        <name>Article</name>
+		<class>ArticleController</class>
+    </controller>
+	
+	<controller>
+        <name>Post</name>
+		<class>PostController</class>
+    </controller>
+	
+
+    <mapping>
+        <name>List</name>
+		<url-pattern>/list</url-pattern>
+    </mapping>
+	
+	<mapping>
+        <name>Article</name>
+		<url-pattern>/article</url-pattern>
+    </mapping>
+	
+	<mapping>
+        <name>Post</name>
+		<url-pattern>/post</url-pattern>
+    </mapping>
+	
+</web-app>
