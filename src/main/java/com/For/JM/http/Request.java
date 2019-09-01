@@ -9,7 +9,6 @@ import java.util.Map;
  * Created with IntelliJ IDEA
  * Description:
  * User: For
- * Date: 2019/8/14
  * Time: 15:49
  */
 public class Request {
@@ -22,7 +21,6 @@ public class Request {
 
 
     public static Request parse(InputStream is) throws IOException {
-        //InputStream是字节流的输入，InputStreamReader是字节流和字符流之间的转换，BufferedReader是格式化输出
         BufferedReader reader=new BufferedReader(new InputStreamReader(is));//将字节流通过InputStreamReader转为字符输入流
         Request request=new Request();//创建请求对象
         parseRequestLine(reader,request);//解析请求行
@@ -36,6 +34,7 @@ public class Request {
 
     private static void parseRequestBody(BufferedReader reader, Request request) throws IOException {
         //取得文章内容长度
+        System.out.println(request.headers.get("Content-Length"));
         int len=Integer.parseInt(request.headers.get("Content-Length"));
         char[] buf=new char[len];
         reader.read(buf,0,len);//将内容读到buf里面
@@ -56,10 +55,10 @@ public class Request {
         if (line==null){
             throw new IOException("读到空行");
         }
-        String[] segments=line.split(" ");//这三个之间以空格进行分割
-        request.setMethod(segments[0]);//第一个是方法
-        request.setUrl(segments[1]);//第二个是url
-        request.setProtocol(segments[2]);//第三个版本号
+        String[] segments=line.split(" ");
+        request.setMethod(segments[0]);
+        request.setUrl(segments[1]);
+        request.setProtocol(segments[2]);
     }
 
     private void setMethod(String method) throws IOException {
@@ -73,7 +72,7 @@ public class Request {
     }
 
     private void setUrl(String url) throws UnsupportedEncodingException {
-        //判断url中有没有queryString,?后面的
+        //判断url中有没有queryString
         String[] minsegments = url.split("\\?");
         this.url = URLDecoder.decode(minsegments[0], "UTF-8");
         if (minsegments.length > 1) {
@@ -82,7 +81,7 @@ public class Request {
         }
     }
 
-    //?后面的，第一行的键值对
+    //问号后面的，第一行的键值对
     private void setRequestParam(String param) throws UnsupportedEncodingException {
         for (String kv : param.split("&")) {
 
@@ -104,7 +103,6 @@ public class Request {
             throw new IOException("错误的版本号");
         }
     }
-//以下是提供属性的get方法
     public String getMethod() {
         return this.method;
     }
@@ -128,7 +126,6 @@ public class Request {
     private static void parseRequestHeader(BufferedReader reader,Request request) throws IOException {
         //按行解析，\r\n结束
         String line;
-        //读到空标识InputStream结束，第二种表示\r\n,不会被读进来，所以去掉trim之后，长度为0表示已经读完了。
         while((line=reader.readLine())!=null&&line.trim().length()!=0){
             String[] segment=line.split(":");
             String key=segment[0].trim();

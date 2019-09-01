@@ -9,7 +9,6 @@ import java.util.*;
  * Created with IntelliJ IDEA
  * Description:
  * User: For
- * Date: 2019/8/14
  * Time: 15:49
  */
 public class Response {
@@ -22,11 +21,6 @@ public class Response {
     public Response(OutputStream os) {
         this.os = os;
     }
-
-    //响应分为响应行，响应头，响应体
-    //首行：版本号+状态码+状态码解释\r\n
-    //Header部分\r\n：Content-type,Date，Content-length冒号分割的键值对，魅族属性之间以\n分隔，遇到空行表示Header部分结束
-    //Body部分：空行后面的就是Body，允许为空字符串，
 
     public static Response build(OutputStream os){
         Response response=new Response(os);
@@ -57,12 +51,11 @@ public class Response {
     public void setHeader(String key, String value) {
         headers.put(key,value);
     }
-//*******************************************以上所有的response部分完结*******************************************
     public void flush() throws IOException {
         setHeader("Content-Length",String.valueOf(off));//设置响应体长度
-        sendResponseLine();//响应行
-        sendResponseHeaders();//响应头
-        sendResponseBody();//响应体
+        sendResponseLine();
+        sendResponseHeaders();
+        sendResponseBody();
     }
 
     private void sendResponseHeaders() throws IOException {
@@ -86,10 +79,9 @@ public class Response {
     }
 
     public void print(Object o) throws UnsupportedEncodingException {
-        //不考虑buf溢出的问题
         byte[] src=o.toString().getBytes("UTF-8");
-        System.arraycopy(src,0,buf,off,src.length);//从src中开始拷，从0开始拷，往buf中拷，从off开始拷，一次拷贝length
-        off+=src.length;//拷完之后加到off里面
+        System.arraycopy(src,0,buf,off,src.length);
+        off+=src.length;//之后加到off里面
     }
 
     public void println(Object o)throws IOException {

@@ -18,7 +18,6 @@ import java.util.Map;
  * Created with IntelliJ IDEA
  * Description:
  * User: For
- * Date: 2019/8/14
  * Time: 16:04
  */
 
@@ -55,8 +54,8 @@ public class WebApp {
         return webApp;
     }
 
-    public Controller findController(Request request) throws ClassNotFoundException, IllegalAccessException, InstantiationException, IOException {
-        String name=findName(request.getUrl());//根据url得到controller名称
+    public Controller findController(Request request) throws IOException {
+        String name=findName(request.getUrl());//根据url得到controller名称/post  /list
         if (name==null){
             return null;
         }

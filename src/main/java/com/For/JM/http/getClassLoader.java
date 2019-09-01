@@ -9,7 +9,6 @@ import java.io.InputStream;
  * Created with IntelliJ IDEA
  * Description:
  * User: For
- * Date: 2019/8/14
  * Time: 16:54
  */
 public class getClassLoader extends ClassLoader{
@@ -27,8 +26,7 @@ public class getClassLoader extends ClassLoader{
         } catch (IOException e) {
             throw new ClassNotFoundException(name, e);
         }
-        // 3. 调用 defineClass，转为 Class？是转为java文件还是获取class的对象？
-        return defineClass(name, buf, 0, buf.length);
+        return defineClass(name, buf, 0, buf.length);//将字节流数组变为字节码文件
     }
 
     private byte[] readClassBytes(File classFile) throws IOException {

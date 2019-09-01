@@ -15,7 +15,6 @@ import java.util.Map;
  * Created with IntelliJ IDEA
  * Description:
  * User: For
- * Date: 2019/8/14
  * Time: 15:50
  */
 public class StaticController extends Controller {
@@ -33,22 +32,20 @@ public class StaticController extends Controller {
         InputStream is=new FileInputStream(filename);
         byte[] buf=new byte[1024];
         int len=0;
-        while((len=is.read(buf))!=-1){//等于-1的时候就读完了
-            response.write(buf,0,len);//读到多少写多少
+        while((len=is.read(buf))!=-1){
+            response.write(buf,0,len);
         }
     }
 
     private String getContentType(String suffix) {
         String contentType=CONTENT_TYPE.get(suffix);
         if (contentType==null){
-            //默认是text/html文件
             contentType="text/html";
         }
         return contentType;
     }
 
     private final Map<String,String> CONTENT_TYPE=new HashMap<String,String>(){
-        //匿名类+构造代码块
         {
             put("html","text/html");
             put("css","text/css");
@@ -59,7 +56,6 @@ public class StaticController extends Controller {
     private String getSuffix(String filename) {
         int index=filename.lastIndexOf(".");//从后向前查找子字符串的位置，返回对应的下标，查不到，就返回-1
         if (index==-1){
-            //没找到
             return null;
         }else{
             return filename.substring(index+1);//取得后缀

@@ -5,7 +5,6 @@ import java.io.IOException;
  * Created with IntelliJ IDEA
  * Description:
  * User: For
- * Date: 2019/8/14
  * Time: 15:47
  */
 abstract public class Controller {

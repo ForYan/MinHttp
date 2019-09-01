@@ -13,7 +13,6 @@ import java.util.concurrent.Executors;
  * Created with IntelliJ IDEA
  * Description:
  * User: For
- * Date: 2019/8/14
  * Time: 15:37
  */
 public class Server {
@@ -37,8 +36,8 @@ public class Server {
                 Request request = Request.parse(socket.getInputStream());//解析一个请求
                 Response response = Response.build(socket.getOutputStream());//返回里面只是一些响应格式的说明
                 // 如果 url 对应静态文件存在，就当成静态文件处理，否则当成动态文件处理
-                String filename = getFilename(request.getUrl());//得到文件路径名称
-                File file = new File(filename);//判断文件存在时需要这样做
+                String filename = getFilename(request.getUrl());
+                File file = new File(filename);
                 Controller controller = null;
                 if (file.exists()) {
                     // 如果url对应的静态文件存在，就当做静态文件处理
@@ -71,12 +70,6 @@ public class Server {
                 response.flush();//将结果刷新到socket
                 socket.close();
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
                 }

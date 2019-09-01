@@ -4,7 +4,6 @@ package com.For.JM.http;
  * Created with IntelliJ IDEA
  * Description:
  * User: For
- * Date: 2019/8/14
  * Time: 15:50
  */
 public enum Status {
@@ -19,7 +18,6 @@ public enum Status {
 
         private int id;
         private String reason;
-        //有了枚举对象，就要有构造方法
          Status( int id, String reason){
             this.id = id;
             this.reason = reason;
